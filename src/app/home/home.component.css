@@ -1,0 +1,83 @@
+.bg-home {
+
+    background: linear-gradient(90deg, rgb(88, 38, 245, 0.9), rgb(14, 196, 221, 0.9));
+}
+
+.bg-ToDo {
+
+    background: rgba(255, 255, 255, 0);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.green {
+    color: #00DE00;
+}
+
+.red {
+    color: rgb(255, 0, 0, 0.5)
+}
+
+.bg-red {
+    background-color: rgb(255, 0, 0, 0.5);
+    width: 2rem;
+    height: 2rem;
+}
+
+.bg-green {
+    background-color: rgb(0, 186, 0, 0.5);
+    width: 2rem;
+    height: 2rem;
+}
+
+.bg-delete {
+    background-color: transparent;
+    border: 0.1px solid rgb(255, 255, 255, 0.3) !important;
+    transition: background-color 0.5s border 0.5s;
+}
+
+.bg-delete:hover {
+    background-color: rgb(255, 0, 0, 0.5);
+    border: 0.1px solid rgb(255, 0, 0, 0.5) !important;
+}
+
+.bg-update {
+    background-color: transparent;
+    border: 0.1px solid rgb(255, 255, 255, 0.3) !important;
+    transition: background-color 0.5s border 0.5s;
+}
+
+.bg-update:hover {
+    background-color: rgb(40, 3, 179, 0.5);
+    border: 0.1px solid rgb(40, 3, 179, 0.5) !important;
+}
+
+.font {
+    color: rgb(88, 38, 245, 0.5);
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.modal-content {
+    background: linear-gradient(90deg, rgb(88, 38, 245, 1), rgb(14, 196, 221, 1)) !important;
+    border: none !important;
+
+}
+
+.mm {
+    top: 25%;
+}
+.mmm{
+    top: 5%;
+   
+}
+
+
+.modal-content input {
+    border: 0.1px solid rgb(88, 38, 245, 0.3) !important;
+}
+.user{
+    position: absolute;
+    top:10%;
+    right: 5%;
+}

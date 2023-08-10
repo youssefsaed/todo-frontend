@@ -1,0 +1,156 @@
+<section>
+    <div class="container p-5  ">
+
+        <div class="dropdown user">
+            <button class="btn bg-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile">profile</a></li>
+                <hr>
+                <li><a class="dropdown-item" (click)="logOut()">log out</a></li>
+            </ul>
+        </div>
+
+
+
+        <div class="d-flex justify-content-end fixed-top mt-5 p-3"></div>
+        <div class="row p-md-5">
+            <h2 class="mt-3">creat To Do</h2>
+            <form [formGroup]="creatToDoForm" (ngSubmit)="add(creatToDoForm)">
+                <div class="col-md-12 d-flex justify-content-center mb-2 align-items-center text-start">
+
+                    <div class="col-md-4 me-2">
+                        <input [(ngModel)]="Title" formControlName="title" type="text" class="form-control"
+                            placeholder="title">
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="Desc" formControlName="description" type="text" class="form-control"
+                            placeholder="description">
+                    </div>
+                    <div class="col-md-4 ms-2 ">
+                        <button type="submit" class="bg-black  rounded-3 py-1 px-4  text-white">Creat </button>
+
+                    </div>
+                </div>
+            </form>
+
+            <hr>
+            <div class="col-md-12 text-start mb-2">
+                <h2>search</h2>
+                <form [formGroup]="searchForm">
+                    <input formControlName="searchInput" id="serchText" [(ngModel)]="word" type="text"
+                        class="form-control" placeholder="Search by title">
+                </form>
+
+            </div>
+            <hr>
+
+            <div class="text-center font " *ngIf="notFound">{{notFound}}</div>
+            <div *ngIf="!notFound" class="bg-home p-5 rounded-5">
+                <div *ngFor="let do of todoArray|search:word" class="col-md-12 bg-ToDo rounded-4 p-2 mb-2">
+                    <div class="d-flex">
+                        <div class=" mb-1 border-1 fs-2 text-center rounded-2 w-25">{{do.title}}</div>
+                        <div class="ps-2 w-75 d-flex  justify-content-between align-items-center">
+                            <p class="m-0 p-0">Status: <i
+                                    [class]="do.status=='pending'?'fa-solid fa-hourglass-start red':'fa-solid fa-check green'">{{do.status}}</i>
+                            </p>
+
+                            <div class="">
+                                <button (click)="complete(do._id)" class="bg-green border-0 rounded-circle"><i
+                                        class="fa-solid fa-check green"></i></button>
+                                <button (click)="pending(do._id)" class="bg-red border-0 rounded-circle ms-md-2"><i
+                                        class="fa-solid fa-hourglass-start red"></i></button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="p-3">{{do.description}}</div>
+                    <hr>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <div>
+                            <button (click)="updatePathId(do._id)" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                                class="bg-update border-0 rounded-4 py-2 px-4 me-2">Update</button>
+                            <button (click)="delete(do._id)"
+                                class="bg-delete border-0 rounded-4 py-2 px-4">Delete</button>
+                        </div>
+                        <div class="m-0">{{do.createdAt|date}}</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Modal profile -->
+    <div class="modal mmm fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="h2"> <span class="h1 c-h">HELLO</span> {{name}}</p>
+                    <p class="h5 fw-lighter"> <span class="fw-bold">email:</span> {{email}}</p>
+                    <p class="h5 fw-lighter"><span class="fw-bold">age:</span>{{age}}</p>
+                </div>
+                <div class="d-flex  justify-content-start flex-column flex-wrap">
+                    <div class="text-center h2">update</div>
+                    <div *ngIf="updateError" class="alert-error p-2 text-center">{{updateError}}</div>
+                    <form [formGroup]="userForm" (ngSubmit)="updateUser(userForm)">
+                        <input [(ngModel)]="nameUp" formControlName="name" class="form-control rounded-2 mt-3"
+                            type="text" placeholder="name">
+                        <input [(ngModel)]="emailUp" formControlName="email" class="form-control rounded-2 my-3"
+                            type="text" placeholder="email">
+                        <input [(ngModel)]="ageUp" formControlName="age" class="form-control rounded-2 mb-3" type="text"
+                            placeholder="age">
+                        <input [(ngModel)]="passwordUp" formControlName="password" class="form-control rounded-2 mb-3"
+                            type="text" placeholder="password">
+                    </form>
+                    <button (click)="updateUser(userForm)" type="button"
+                        class="bg-update mb-2 mx-2 p-3 rounded-3">update</button>
+                    <button (click)="deleteUser()" type="button" class="bg-delete p-3 rounded-3 mx-2 mb-2"
+                        data-bs-dismiss="modal">delete your
+                        email</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal update -->
+    <div class="modal mm fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">UPDATE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <form [formGroup]="updateForm" (ngSubmit)="update(updateForm)">
+                        <input [(ngModel)]="updateTitle" formControlName="title" type="text"
+                            class="form-control bg-transparent mb-2" placeholder="title">
+                        <input [(ngModel)]="updateDasc" formControlName="description" type="text"
+                            class="form-control bg-transparent" placeholder="description">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-delete rounded-2 p-2" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" (click)="update(updateForm)"
+                        class="px-3 py-2 done rounded-2 bg-update">update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,63 @@
+<section class="bg-welcom">
+    <div class="row">
+        <form [formGroup]="SignUpForms" (ngSubmit)="SendData(SignUpForms)">
+            <div class="w-75 bg-auth p-4 rounded-4 position-absolute top-50 start-50 translate-middle">
+                <div class="alert-error text-center border-0 rounded p-3 m-2  " *ngIf="errorMessage">{{errorMessage}}
+                </div>
+                <div class="col-md-12 ">
+                    <input formControlName="name" type="text" class="form-control p-2 mb-3" placeholder="name">
+                    <div *ngIf="SignUpForms.get('name')?.errors && SignUpForms.get('name')?.touched">
+                        <p *ngIf="SignUpForms.get('name')?.getError('required')">name is required</p>
+                        <p *ngIf="SignUpForms.get('name')?.getError('minlength')">Minimum letters is 5</p>
+                        <p *ngIf="SignUpForms.get('name')?.getError('maxlength')">Maximum letters is 15</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input formControlName="email" type="email" class="form-control p-2 mb-3" placeholder="Email">
+                    <div *ngIf="SignUpForms.get('email')?.errors && SignUpForms.get('email')?.touched">
+                        <p *ngIf="SignUpForms.get('email')?.getError('required')">email is required</p>
+                        <p *ngIf="SignUpForms.get('email')?.getError('pattern')">email must be a valid</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input formControlName="password" type="password" class="form-control p-2 mb-3"
+                        placeholder="Password">
+                    <div *ngIf="SignUpForms.get('password')?.errors && SignUpForms.get('password')?.touched">
+                        <p *ngIf="SignUpForms.get('password')?.getError('required')">password is required</p>
+                        <p *ngIf="SignUpForms.get('password')?.getError('pattern')">Invalid password</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input formControlName="confirmPassword" type="password" class="form-control p-2 mb-3"
+                        placeholder="confirm Password">
+                    <div *ngIf="SignUpForms.get('confirmPassword')?.touched">
+                        <p *ngIf="SignUpForms.get('confirmPassword')?.getError('required')">confirm Password is required
+                        </p>
+                        <p *ngIf="SignUpForms.get('password')?.value!=SignUpForms.get('confirmPassword')?.value">confirm
+                            password not match</p>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <input formControlName="age" type="number" class="form-control p-2 mb-3" placeholder="age">
+                    <div *ngIf="SignUpForms.get('age')?.errors && SignUpForms.get('age')?.touched">
+                        <p *ngIf="SignUpForms.get('age')?.getError('required')">age is required</p>
+                        <p *ngIf="SignUpForms.get('age')?.getError('min')">Minimum 10</p>
+                        <p *ngIf="SignUpForms.get('age')?.getError('max')">Maximum 90</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
+                    <button [disabled]="SignUpForms.status=='INVALID'" type="submit"
+                        class=" px-5 py-2 border bg-transparent text-white rounded-pill mb-3">SignUp</button>
+                    <div> Already have an account?<a routerLink="/LogIn"
+                            class="text-decoration-none text-info px-2">LogIn</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </form>
+    </div>
+</section>

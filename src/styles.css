@@ -1,0 +1,30 @@
+.form-control {
+    background-color: transparent !important;
+    border: 0.1px solid rgb(255, 255, 255, 0.3) !important;
+}
+
+.form-control:focus {
+    border-color: rgb(88, 38, 245, 0.5) !important;
+    box-shadow: 0 0 0 0.2rem rgb(88, 38, 245, 0.25) !important;
+}
+
+.alert-error {
+    background: linear-gradient(90deg, rgb(88, 38, 245, 1), rgb(14, 196, 221, 1));
+    /* background-color: transparent; */
+}
+
+.bg-welcom {
+    /* background-image: url(src/assets/images/1.jpg);
+    background-position: center center;
+    background-size: cover; */
+    background: linear-gradient(90deg, rgb(88, 38, 245, 0.5), rgb(14, 196, 221, 0.5));
+    height: 100vh;
+}
+
+body {
+    background: linear-gradient(90deg, rgb(88, 38, 245), rgb(14, 196, 221));
+}
+
+.bg-auth {
+    background: linear-gradient(90deg, rgb(88, 38, 245, 0.5), rgb(14, 196, 221, 0.5));
+}
